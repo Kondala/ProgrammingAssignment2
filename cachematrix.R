@@ -30,18 +30,18 @@ makeCacheMatrix <- function(mtx = matrix()) {  #mtx constitutes the data
 
 ## Write a short comment describing this function
 
-cacheSolve <- function(fnlist, ...) {
+cacheSolve <- function(fnlist, ...) {  #fnlist is the list of functions returned by makeCacheMatrix
   
-  mtx_inverse <- fnlist$get_inverse()
+  mtx_inverse <- fnlist$get_inverse()  #call the get_inverse() function from fnlist
   
-  if (!is.null(mtx_inverse)) {
+  if (!is.null(mtx_inverse)) {		#if the above call to get_inverse() results in a non-null value
     message("getting cached matrix inverse")
-    return(mtx_inverse)
+    return(mtx_inverse)			#then return that value
   }
   
-  mtx <- fnlist$get_mtx()
-  mtx_inverse <- solve(mtx)
-  fnlist$set_inverse(mtx_inverse)
-  mtx_inverse
+  mtx <- fnlist$get_mtx()		#if we are still here, then the above call to get_inverse() returned a null
+  mtx_inverse <- solve(mtx)		#call the solve() function to get the inverse of mtx
+  fnlist$set_inverse(mtx_inverse)	#call set_inverse() with the just created inverse
+  mtx_inverse				#this simply returns the matrix inverse
   
 }
